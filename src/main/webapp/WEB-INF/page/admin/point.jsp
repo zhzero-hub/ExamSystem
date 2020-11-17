@@ -276,11 +276,12 @@
                 </li>
             </c:forEach>
         </ul>
-        </ul>
-        <button  class="btn btn-info"id="addpoint1">添加章节</button>
-        <button  class="btn btn-info"id="addpoint2">添加小节</button>
-        <button  class="btn btn-info" id="delpoint1">删除章节</button>
-        <button  class="btn btn-info" id="delpoint2">删除小节</button>
+        <div style="text-align: center">
+            <button class="btn btn-info" id="addpoint1">添加章节</button>
+            <button class="btn btn-info" id="addpoint2">添加小节</button>
+            <button  class="btn btn-info" id="delpoint1">删除章节</button>
+            <button  class="btn btn-info" id="delpoint2">删除小节</button>
+        </div>
     </div>
     <!-- /#page-wrapper -->
     <!--二级联动-->
@@ -349,7 +350,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="my">添加小节</h4>
             </div>
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="<%=basePath%>/user/addpoint2.do" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">章节</label>
@@ -369,7 +370,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id = "addp2but">提交</button>
+                    <button type="submit" class="btn btn-primary" id = "addp2but">提交</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -442,7 +443,7 @@
     });
     //添加小节
     $("#addpoint2").click(function(){
-        $("#addp2_select option").remove();
+        //$("#addp2_select option").remove();
         getpoint1();
         $("#addp2").modal({
             backdrop:"static"
@@ -464,7 +465,7 @@
     $("#delpoint2").click(function(){
         $("#chapter option").remove();
         $("#chaptertwo option").remove();
-       getpoint();
+        getpoint();
         $("#delp2").modal({
             backdrop:"static"
         });
@@ -504,7 +505,7 @@
     }
     function getpoint1() {
         $.ajax({
-            url:"${APP_PATH}/user/allpoint1.do",
+            url:"<%=basePath%>/user/allpoint1.do",
             type:"GET",
             success:function(data) {
                 //console.log(data);
@@ -517,17 +518,6 @@
             }
         });
     }
-    $("#addp2but").click(function(){
-        alert($("#addp2 form").serialize())//序列化form上的数据
-        $.ajax({
-            url:"${APP_PATH}/user/addpoint2.do",
-            type:"POST",
-            data:$("#addp2 form").serialize(),
-            success:function() {
-                $("#addp2").modal('hide');
-            }
-        });
-    });
     //清空表单样式及内容
     function reset_form(ele){
         $(ele)[0].reset();

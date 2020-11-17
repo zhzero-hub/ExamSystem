@@ -100,10 +100,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "findallteacher.do")
-    @ResponseBody
-    public String findTeacherAll(Model model){
+    public String findTeacherAll(Model model, @RequestParam(defaultValue = "1") int pn){
+        PageHelper.startPage(pn,6);
         List<Teacher> teachers  = userService.findTeacherAll();
-        model.addAttribute("teachers",teachers);
+        PageInfo pageInfo = new PageInfo(teachers,5);
+        model.addAttribute("pageInfo",pageInfo);
         return  "page/admin/teacher";
     }
 
@@ -113,10 +114,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "deletemanyteacher.do")
-    @ResponseBody
     public String ManyTeacher(String chk_value){
         teacherService.deleteManyTeacher(chk_value);
-        return "redirect:findallteacher.do";
+        return "redirect:/user/findallteacher.do";
     }
 
     /**
@@ -138,7 +138,6 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "save.do")
-    @ResponseBody
     public String create(Teacher teacher, Model model) {
         try {
             userService.create(teacher);
@@ -146,7 +145,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:findallteacher.do";
+        return "redirect:/user/findallteacher.do";
     }
 
     /**
@@ -156,14 +155,13 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "delete.do")
-    @ResponseBody
     public String delete(@RequestParam Long id, Model model) {
         try {
             userService.delete(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:findallteacher.do";
+        return "redirect:/user/findallteacher.do";
     }
 
     /**
@@ -189,7 +187,6 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "update.do")
-    @ResponseBody
     public String update(Teacher teacher, Model model) {
         try {
             userService.update(teacher);
@@ -197,7 +194,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:findallteacher.do";
+        return "redirect:/user/findallteacher.do";
     }
 
     /**
@@ -235,11 +232,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "delep1.do")
-    @ResponseBody
-    public  String DeleteP1(@RequestParam int id){
+    public String DeleteP1(@RequestParam int id){
         userService.deletep1((long) id);
         userService.deletepp1((long) id);
-        return "redirect:findpoint1.do";
+        return "redirect:/user/findpoint1.do";
     }
 
     /**
@@ -248,10 +244,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "delep2.do")
-    @ResponseBody
-    public  String DeleteP2(@RequestParam String chaptertwo){
-        userService.deletep2(chaptertwo);
-        return "redirect:findpoint1.do";
+    public String DeleteP2(@RequestParam String chaptertwo){
+        if(!chaptertwo.isEmpty()) {
+            userService.deletep2(chaptertwo);
+        }
+        return "redirect:/user/findpoint1.do";
     }
 
     /**
@@ -268,6 +265,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("Point2: " + point2.toString());
         return "redirect:/user/findpoint1.do";
     }
 
@@ -323,7 +321,7 @@ public class UserController {
      */
     @RequestMapping(value = "findallchoice.do")
     public String findChoiceAll(Model model,@RequestParam(defaultValue = "1") int pn){
-        System.out.println("进入选择题查询！");
+        //System.out.println("进入选择题查询！");
         PageHelper.startPage(pn,6);
         List<Choice>choice = userService.findChoiceAll();
         PageInfo pageInfo = new PageInfo(choice,5);
@@ -438,7 +436,7 @@ public class UserController {
     @RequestMapping(value = "ListTeacher.do")
     @ResponseBody
     public String toListPage(Model model) {
-        return "redirect:findallteacher.do";
+        return "redirect:/user/findallteacher.do";
     }
 
     /**

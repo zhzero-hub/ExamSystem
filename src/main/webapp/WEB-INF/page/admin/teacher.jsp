@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
@@ -94,9 +94,28 @@
                 ids.push($(this).attr("id"));
             });
             var chk_value=ids.join(",");
+            if(chk_value === "") {
+                alert("请选择批量删除的教师");
+                return;
+            }
             location.href = "<%=basePath%>/user/deletemanyteacher.do?chk_value="+chk_value;
+            alert("批量删除成功");
         });
     });
+
+    function check() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if(username === "") {
+            alert("姓名不能为空");
+            return false;
+        }
+        else if(password === "") {
+            alert("密码不能为空");
+            return false;
+        }
+        return true;
+    }
 </script>
 <body>
 
@@ -205,7 +224,7 @@
                 <table style="width: 90%" class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th colspan="7"><button class="line btn btn-primary btn-sm" id="teacheradd">添加老师</button>
+                        <th colspan="7"><button class="line btn btn-primary btn-sm" id="teacheradd">添加教师</button>
                             &nbsp;&nbsp;&nbsp; <button class="line btn btn-primary btn-sm" id="getAllSelectedId" >批量删除</button></th>
                     </tr>
                     <tr>
@@ -219,7 +238,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${requestScope.teachers}" var="ts">
+                    <c:forEach items="${pageInfo.list}" var="ts">
                         <tr class="text-center">
                             <td><input type="checkbox" name="items" id="${ts.id}"/></td>
                             <td>${ts.username}</td>
@@ -252,9 +271,9 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">老师添加</h4>
+                            <h4 class="modal-title" id="myModalLabel">教师添加</h4>
                         </div>
-                        <form class="form-horizontal" action="<%=basePath%>/user/save.do" method="post">
+                        <form class="form-horizontal" action="<%=basePath%>/user/save.do" method="post" onsubmit="return check()">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">姓名</label>
@@ -293,7 +312,7 @@
                                     <label class="col-sm-2 control-label">密码</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="password" class="form-control" id="password"
-                                               placeholder="数字或英语">
+                                               placeholder="数字或字符">
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
