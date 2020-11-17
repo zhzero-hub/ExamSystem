@@ -27,6 +27,8 @@ public interface ExamService {
     void DeletePaperJudge(int examid);
     void DeleteExamInfo(int examid);
     List<ExamHistory>ByExamId(int examid);
+    int getChoiceNum(ExamInformation examInformation);
+    int getJudgeNum(ExamInformation examInformation);
 
 //    List<WrongAnswer>WrongChoice(int studentid);
 //    List<WrongAnswer>WrongJudge(int studentid);

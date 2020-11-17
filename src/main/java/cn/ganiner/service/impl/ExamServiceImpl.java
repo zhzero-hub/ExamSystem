@@ -112,5 +112,15 @@ examMapper.DeletePaperJudge(examid);
         return examMapper.ByExamId(examid);
     }
 
+    @Override
+    public int getChoiceNum(ExamInformation examInformation) {
+        return examMapper.getChoiceNum(examInformation.getChaptertwo() , examInformation.getDifficulty());
+    }
+
+    @Override
+    public int getJudgeNum(ExamInformation examInformation) {
+        return examMapper.getJudgeNum(examInformation.getChaptertwo() , examInformation.getDifficulty());
+    }
+
 
 }

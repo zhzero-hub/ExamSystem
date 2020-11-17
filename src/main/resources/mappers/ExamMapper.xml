@@ -5,23 +5,11 @@
 
     <!--创建考试-->
     <insert id="CreateExam" parameterType = "ExamInformation" useGeneratedKeys="true" keyProperty="id">
-        insert into exam_information(examname,begindate,enddate,password,examtime,teacher,chaptertwo,choicenum,choicescore,
-           judgenum,judgescore,difficulty)
-        values(#{examname},
-         #{begindate},
-           #{enddate},
-                  #{password},
-                   #{examtime},
-                    #{teacher},
-                    #{chaptertwo},
-                    #{choicenum},
-                    #{choicescore},
-                    #{judgenum},
-                    #{judgescore},
-                    #{difficulty})
+        insert into exam_information(examname,begindate,enddate,password,examtime,teacher,chaptertwo,choicenum,choicescore,judgenum,judgescore,difficulty)
+        values(#{examname},#{begindate},#{enddate},#{password},#{examtime},#{teacher},#{chaptertwo},#{choicenum},#{choicescore},#{judgenum},#{judgescore},#{difficulty})
     </insert>
     <select id="AllExam" resultType="ExamInformation">
-        select *from exam_information
+        select * from exam_information
     </select>
     <!--生成选择题-->
     <select id="RandChoice" resultType="PaperChoice">
@@ -110,4 +98,13 @@
     <select id="ByExamId" resultType="ExamHistory">
             select  * from examhistory  where examid = #{examid} order by score desc
     </select>
+
+    <select id="getChoiceNum" resultType="int" parameterType="ExamInformation">
+        select count(*) from tk_choice where chaptertwo = #{chaptertwo} and difficulty = #{difficulty};
+    </select>
+
+    <select id="getJudgeNum" resultType="int" parameterType="ExamInformation">
+        select count(*) from tk_judge where chaptertwo = #{chaptertwo} and difficulty = #{difficulty};
+    </select>
+
 </mapper>

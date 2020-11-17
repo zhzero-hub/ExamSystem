@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
@@ -61,7 +62,7 @@ public class ExamController {
             paperJudges.get(i).setExamid(examInformation.getId());
         }
       examService.insertRandJudge(paperJudges);
-        return "redirect:examall.do";
+        return "redirect:/exam/examall.do";
     }
 
     /**
@@ -70,10 +71,21 @@ public class ExamController {
      * @return
      */
     @RequestMapping(value = "adminexamadd.do")
-    public  String Adminexamadd(ExamInformation examInformation){
+    public String Adminexamadd(HttpServletRequest request, ExamInformation examInformation){
+        System.out.println("进入试卷添加界面");
+        if(examService.getChoiceNum(examInformation) < examInformation.getChoicenum()) {
+            System.out.println("选择题数量不足");
+            request.setAttribute("examInfo" , "选择题数量不足");
+            return "redirect:/exam/allexam.do";
+        }
+        else if(examService.getJudgeNum(examInformation) < examInformation.getJudgenum()) {
+            System.out.println("判断题数量不足");
+            request.setAttribute("examInfo" , "判断题数量不足");
+            return "redirect:/exam/allexam.do";
+        }
         examService.CreateExam(examInformation);
-        List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
-        List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
+        List<PaperJudge> paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
+        List<PaperChoice> paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
         for (int i = 0;i<paperChoices.size();i++){
             paperChoices.get(i).setExamid(examInformation.getId());
         }
@@ -83,8 +95,8 @@ public class ExamController {
             paperJudges.get(i).setExamid(examInformation.getId());
         }
         examService.insertRandJudge(paperJudges);
-
-        return "redirect:allexam.do";
+        request.setAttribute("examInfo" , "success");
+        return "redirect:/exam/allexam.do";
     }
 
     /**
@@ -138,7 +150,7 @@ public class ExamController {
         examService.DeletePaperChoice(examid);
         examService.DeletePaperJudge(examid);
         examService.DeleteExamInfo(examid);
-        return "redirect:examall.do";
+        return "redirect:/exam/examall.do";
     }
 
 
@@ -147,7 +159,7 @@ public class ExamController {
         examService.DeletePaperChoice(examid);
         examService.DeletePaperJudge(examid);
         examService.DeleteExamInfo(examid);
-        return "redirect:allexam.do";
+        return "redirect:/exam/allexam.do";
     }
 
     /**

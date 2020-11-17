@@ -269,7 +269,6 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 </body>
 <script>
-
     //删除
     function trash(examid) {
         if (!id) {

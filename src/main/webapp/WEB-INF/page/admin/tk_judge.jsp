@@ -296,8 +296,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">知识点</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="upchapter" name="chapter">
-                                    </select>
+                                    <select class="form-control" id="upchapter" name="chapter"></select>
                                     <select class="form-control" id="upchaptertwo" name="chaptertwo"></select>
                                 </div>
                             </div>
@@ -428,7 +427,7 @@
         $("#chapter").empty();
         $("#chaptertwo").empty();
         $.ajax({
-            url: "<%=basePath%>>/user/pointall.do",
+            url: "<%=basePath%>/user/pointall.do",
             type: "GET",
             success: function (data) {
                 console.log(data);
@@ -437,14 +436,16 @@
                 for (var i = 0; i < data.length; i++) {
                     chapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>");
                 }
-                for (var j = 0; j < data[0].point2.length; j++) {
-                    console.log("当前位置" + data[0].point2[j].pname + "内容为" + data[0].point2[j].pname);
-                    chaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
+                if(data.length > 0) {
+                    for (var j = 0; j < data[0].point2.length; j++) {
+                        console.log("当前位置" + data[0].point2[j].pname + "内容为" + data[0].point2[j].pname);
+                        chaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
+                    }
                 }
                 //select1绑定change事件
                 $("#chapter").change(function () {
                     var p = this.value;
-                    console.log("第几个" + p);
+                    //console.log("第几个" + p);
                     p = p - 1;
                     //删除原来的信息
                     $("#chaptertwo").empty();

@@ -317,8 +317,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">知识点</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="upchapter" name="chapter">
-                                    </select>
+                                    <select class="form-control" id="upchapter" name="chapter"></select>
                                     <select class="form-control" id="upchaptertwo" name="chaptertwo"></select>
                                 </div>
                             </div>
@@ -486,7 +485,7 @@
                 //select1绑定change事件
                 $("#chapter").change(function () {
                     var p = this.value;
-                    console.log("第几个" + p);
+                    //console.log("第几个" + p);
                     p = p - 1;
                     //删除原来的信息
                     $("#chaptertwo").empty();

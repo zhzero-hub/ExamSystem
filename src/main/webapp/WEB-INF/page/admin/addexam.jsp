@@ -134,7 +134,6 @@
                     </ul>
                 </li>
 
-
             </ul>
         </div>
     </div>
@@ -149,7 +148,7 @@
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">试卷名称</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="examname" name="examname" type="text"  placeholder="试卷名称" />
+                            <input class="form-control" id="examname" name="examname" type="text"  placeholder="试卷名称">
                         </div>
                     </div>
                     <div class="form-group">
@@ -193,13 +192,13 @@
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">选择数量</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="choicenum" name="choicenum" type="text"  placeholder="试卷中的试题总量" />
+                            <input class="form-control" id="choicenum" name="choicenum" type="text"  placeholder="试卷中的试题总量，当前题库中选择题的数量: " />
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">每小题分数</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="choicescore" name="choicescore" type="text"  placeholder="每个选择题的分值" />
+                            <input class="form-control" id="choicescore" name="choicescore" type="text"  placeholder="每个选择题的分值，当前题库中判断题的数量: " />
                         </div>
                     </div>
                     <div class="form-group">
@@ -247,8 +246,8 @@ $(function(){
         type:"GET",
         success:function(data) {
             console.log(data);
-            var chapter =$(document).find("#chapter");
-            var chaptertwo =$(document).find("#chaptertwo");
+            var chapter = $(document).find("#chapter");
+            var chaptertwo = $(document).find("#chaptertwo");
             var  num= data.length;
             //   console.log("长度是"+num);
             var pp = new Array(num+1);

@@ -16,7 +16,7 @@ public interface ExamMapper {
     List<PaperChoice> RandChoice(@Param("choicenum") Long choicenum, @Param("chaptertwo") String chaptertwo, @Param("difficulty") int difficulty);
     List<PaperJudge> RandJudge(@Param("judgenum") Long judgenum, @Param("chaptertwo") String chaptertwo, @Param("difficulty") int difficulty);
 
-   void insertRandChoice(List<PaperChoice> paperChoices);
+    void insertRandChoice(List<PaperChoice> paperChoices);
     void insertRandJudge(List<PaperJudge> paperJudges);
     List<PaperChoice>AllPaperChoice(int examid);
     List<PaperJudge>AllPaperJudge(int examid);
@@ -31,5 +31,7 @@ public interface ExamMapper {
     void DeletePaperJudge(int examid);
     void DeleteExamInfo(int examid);
     List<ExamHistory>ByExamId(int examid);
+    int getChoiceNum(@Param("chaptertwo") String chaptertwo, @Param("difficulty") int difficulty);
+    int getJudgeNum(@Param("chaptertwo") String chaptertwo, @Param("difficulty") int difficulty);
 
 }

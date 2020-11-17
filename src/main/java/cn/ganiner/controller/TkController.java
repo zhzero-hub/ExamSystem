@@ -152,7 +152,7 @@ public class TkController {
     }
 
 
-    @RequestMapping("alljudge")
+    @RequestMapping("alljudge.do")
     public String AllJudge(Model model,@RequestParam(defaultValue = "1") int pn){
         PageHelper.startPage(pn,6);
         List<Judge>judges = tkService.AllJudge();
