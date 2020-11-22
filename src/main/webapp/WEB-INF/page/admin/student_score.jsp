@@ -19,7 +19,7 @@
     <link href="<%=basePath%>/vendor/dist/css/sb-admin-2.css" rel="stylesheet">
     <link href="<%=basePath%>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="<%=basePath%>/vendor/js/123.js"></script>
-    <script src="<%=basePath%>/vendor/js/456.js"></script>
+    <script src="<%=basePath%>/vendor/js/respond.js"></script>
 </head>
 
 <body>

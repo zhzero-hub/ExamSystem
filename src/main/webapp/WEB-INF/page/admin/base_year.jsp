@@ -223,18 +223,23 @@
             </thead>
             <tr>
                 <th>入学时间</th>
-                <th>操作&nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
-                </th>
+                <th>操作</th>
             </tr>
             <c:forEach items="${semester}" var="se">
             <tr>
-                <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allmajor.do?seid=${se.seid}">${se.sename}</a></td>
-                <td >
-                    <input style="width: 25%" class="btn btn-outline btn-primary"type="button" value="编辑" onclick="edit('${se.seid}','${se.sename}')" >
-                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deleteyear(${se.seid})" >
+                <td style="margin-top: 50%;vertical-align:middle"><a href="<%=basePath%>/basic/allmajor.do?seid=${se.seid}">${se.sename}</a></td>
+                <td>
+                    <input style="width: 25%;vertical-align:middle" class="btn btn-outline btn-primary"type="button" value="编辑" onclick="edit('${se.seid}','${se.sename}')" >
+                    <input style="width: 25%;vertical-align:middle" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deleteyear(${se.seid})" >
                 </td>
             </tr>
             </c:forEach>
+            <tr>
+                <th>...</th>
+                <th>
+                    <input style="width: 25%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
+                </th>
+            </tr>
         </table>
         <%--<div align="center">--%>
             <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">--%>

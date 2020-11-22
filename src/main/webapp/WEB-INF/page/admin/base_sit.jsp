@@ -181,18 +181,22 @@
 
             <tr>
                 <th>职称</th>
-                <th>操作&nbsp;
-                    &nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
-                </th>
+                <th>操作</th>
             </tr>
             <c:forEach items="${sit}" var="ma">
                 <tr>
                     <td style="margin-top: 50%"  >${ma.sit}</td>
-                    <td ><input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑"  onclick="edit('${ma.sit}','${ma.id}')">
-                        <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deletemajor('${ma.id}') " data-toggle="modal" data-target="#trashModal" >
+                    <td ><input style="width: 25%" class="btn btn-outline btn-primary" type="button" value="编辑"  onclick="edit('${ma.sit}','${ma.id}')">
+                        <input style="width: 25%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deletemajor('${ma.id}') " data-toggle="modal" data-target="#trashModal" >
                     </td>
                 </tr>
             </c:forEach>
+            <tr>
+                <th>...</th>
+                <th>
+                    <input style="width: 25%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
+                </th>
+            </tr>
         </table>
         <%--<div align="center">--%>
         <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >--%>

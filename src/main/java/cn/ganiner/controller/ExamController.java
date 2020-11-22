@@ -263,6 +263,7 @@ public class ExamController {
      */
     @RequestMapping(value = "examallstu.do")
     public String ExamStuAll(Model model, @RequestParam int studentid){
+        System.out.println("进入学生考试信息界面");
         List<ExamInformation>examInfos = examService.AllExam();
         List<ExamHistory>examHistories =examService.ByStudentid(studentid);
           for(int i = 0;i < examInfos.size();i++){
@@ -331,7 +332,7 @@ public class ExamController {
        examHistory.setStudentid(studentid);
        examHistory.setScore(allscore);
        examService.CreateExamHistory(examHistory);
-        return "redirect:examallstu.do?studentid="+studentid;
+        return "redirect:/exam/examallstu.do?studentid="+studentid;
     }
 
     /**
