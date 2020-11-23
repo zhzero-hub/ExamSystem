@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 //拦截器
 public class LoginInterceptor implements HandlerInterceptor {
@@ -27,15 +28,24 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         // 重定向到登录页面
-//        request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+//       request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
         response.sendRedirect(request.getContextPath() + "/index.jsp");
         return false;*/
         return true;
+
+
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-
+        String message = (String)httpServletRequest.getAttribute("examError");
+        if(message == null || message.isEmpty() || message.equals("success")){
+            return;
+        }
+        PrintWriter pw = httpServletResponse.getWriter();
+        pw.write(message);
+        pw.flush();
+        pw.close();
     }
 
     @Override

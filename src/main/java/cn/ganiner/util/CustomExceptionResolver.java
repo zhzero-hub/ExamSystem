@@ -54,7 +54,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
             httpServletResponse.setContentType("application/json;charset=utf-8");
             try{
                 httpServletResponse.getWriter().write(json);
-                httpServletResponse.getWriter().flush();;
+                httpServletResponse.getWriter().flush();
             }catch (IOException e1){
                 e1.printStackTrace();
             }

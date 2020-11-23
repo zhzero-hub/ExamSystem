@@ -86,13 +86,15 @@
                         <li>
                             <a href="<%=basePath%>/tea_tk/alljudge.do">判断题查询</a>
                         </li>
-                        <%--<li>--%>
-                        <%--<a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>--%>
-                        <%--</li>--%>
-                        <%--<li>--%>
-                        <%--<a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>--%>
-                        <%--</li><li>--%>
-                        <%--<a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>                        </li>--%>
+                        <li>
+                        <a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>
+                        </li>
+                        <li>
+                        <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
+                        </li>
+                        <li>
+                        <a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>
+                        </li>
 
                     </ul>
                     <!-- /.nav-second-level -->
@@ -217,6 +219,8 @@
                     <br />
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
+                            <div style="color: #c23321">${examError}</div>
+                            <br>
                             <button  type="submit" class="btn btn-default btn-lg btn-block">
                                 生成试卷
                             </button>

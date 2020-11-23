@@ -160,19 +160,19 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
+                                <a href="<%=basePath%>/tea_tk/alljudge.do">判断题查询</a>
                             </li>
-                            <%--</li>--%>
-                            <%--<li>--%>
-                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
-                            <%--</li>--%>
-                            <%--<li>--%>
-                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
-                            <%--</li><li>--%>
-                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
+                            <li>
+                                <a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

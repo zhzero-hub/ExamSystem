@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestScope;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -50,7 +51,19 @@ public class ExamController {
      * @return
      */
     @RequestMapping(value = "examadd.do")
-    public  String examadd(ExamInformation examInformation){
+    public String examadd(ExamInformation examInformation, Model model){
+        if(examService.getChoiceNum(examInformation) < examInformation.getChoicenum()) {
+            model.addAttribute("examError" , "选择题数量不足");
+            List<ExamInformation>examInfos = examService.AllExam();
+            model.addAttribute("examInfo",examInfos);
+            return "page/teacher/addexam";
+        }
+        else if(examService.getJudgeNum(examInformation) < examInformation.getJudgenum()) {
+            model.addAttribute("examError" , "判断题数量不足");
+            List<ExamInformation>examInfos = examService.AllExam();
+            model.addAttribute("examInfo",examInfos);
+            return "page/teacher/addexam";
+        }
         examService.CreateExam(examInformation);
         List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
         List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
@@ -71,17 +84,21 @@ public class ExamController {
      * @return
      */
     @RequestMapping(value = "adminexamadd.do")
-    public String Adminexamadd(HttpServletRequest request, ExamInformation examInformation){
+    public String Adminexamadd(ExamInformation examInformation, Model model){
         System.out.println("进入试卷添加界面");
         if(examService.getChoiceNum(examInformation) < examInformation.getChoicenum()) {
             System.out.println("选择题数量不足");
-            request.setAttribute("examInfo" , "选择题数量不足");
-            return "redirect:/exam/allexam.do";
+            model.addAttribute("examError" , "选择题数量不足");
+            List<ExamInformation>examInfos = examService.AllExam();
+            model.addAttribute("examInfo",examInfos);
+            return "page/admin/addexam";
         }
         else if(examService.getJudgeNum(examInformation) < examInformation.getJudgenum()) {
             System.out.println("判断题数量不足");
-            request.setAttribute("examInfo" , "判断题数量不足");
-            return "redirect:/exam/allexam.do";
+            model.addAttribute("examError" , "判断题数量不足");
+            List<ExamInformation>examInfos = examService.AllExam();
+            model.addAttribute("examInfo",examInfos);
+            return "page/admin/addexam";
         }
         examService.CreateExam(examInformation);
         List<PaperJudge> paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
@@ -95,7 +112,7 @@ public class ExamController {
             paperJudges.get(i).setExamid(examInformation.getId());
         }
         examService.insertRandJudge(paperJudges);
-        request.setAttribute("examInfo" , "success");
+        //request.setAttribute("examInfo" , "success");
         return "redirect:/exam/allexam.do";
     }
 
